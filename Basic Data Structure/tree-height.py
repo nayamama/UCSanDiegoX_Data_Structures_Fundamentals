@@ -50,11 +50,3 @@ def main():
 
 threading.Thread(target=main).start()
 
-'''
-s = [4, -1, 4, 1, 1]
-t = dict()
-for idx, v in enumerate(s):
-    print(idx, v)
-    t.setdefault(v, []).append(idx)
-print(t)
-'''
