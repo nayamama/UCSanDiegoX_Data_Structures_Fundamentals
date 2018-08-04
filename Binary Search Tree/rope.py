@@ -3,12 +3,11 @@
 You will implement this data structure to store a string and efficiently cut a part (a
 substring) of this string and insert it in a different position.
 """
-import sys
 
 
 class Rope:
-    def __init__(self, s):
-        self.s = s
+    def __init__(self):
+        self.s = None
 
     def result(self):
         return self.s
@@ -21,10 +20,23 @@ class Rope:
         else:
             self.s = self.s[:k] + sub + self.s[k:]
 
+    def read_file(self, file):
+        with open(file, "r") as f:
+            lines = f.readlines()
+            self.s = lines[0]
+            n = int(lines[1])
+            assert n == len(lines[2:])
+            queries = []
+            for i in range(n):
+                queries.append(list(map(int, lines[i+2].strip().split())))
+        return queries
 
-rope = Rope(sys.stdin.readline().strip())
-q = int(sys.stdin.readline())
-for _ in range(q):
-    i, j, k = map(int, sys.stdin.readline().strip().split())
-    rope.process(i, j, k)
-print(rope.result())
+
+if __name__ == "__main__":
+    file_path = "rope_example.txt"
+    r = Rope()
+    queries = r.read_file(file_path)
+    for q in queries:
+        r.process(q[0], q[1], q[2])
+
+    print(r.s)
